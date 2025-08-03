@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { fetchUserData } from '../githubService';
+import { fetchUserData } from '../services/githubService';
 
 const Search = () => {
   const [input, setInput] = useState('');
