@@ -3,31 +3,29 @@ import { useState } from "react";
 function AddRecipeForm() {
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
-  const [instructions, setInstructions] = useState("");
-  const [errors, setErrors] = useState({}); // ✅ errors state
+  const [steps, setSteps] = useState(""); // ✅ renamed from instructions
+  const [errors, setErrors] = useState({});
 
-  // ✅ Validation function
   const validate = () => {
     const newErrors = {};
     if (!title.trim()) newErrors.title = "Title is required";
     if (!ingredients.trim()) newErrors.ingredients = "Ingredients are required";
-    if (!instructions.trim()) newErrors.instructions = "Instructions are required";
+    if (!steps.trim()) newErrors.steps = "Steps are required"; // ✅ updated
     return newErrors;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const validationErrors = validate(); // ✅ call validate
+    const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors); // ✅ setErrors
+      setErrors(validationErrors);
       return;
     }
     setErrors({});
     alert("Recipe submitted!");
-    // Reset form
     setTitle("");
     setIngredients("");
-    setInstructions("");
+    setSteps(""); // ✅ reset steps
   };
 
   return (
@@ -58,11 +56,11 @@ function AddRecipeForm() {
         <div>
           <textarea
             placeholder="Preparation Steps"
-            value={instructions}
-            onChange={(e) => setInstructions(e.target.value)}
+            value={steps}
+            onChange={(e) => setSteps(e.target.value)}
             className="w-full p-2 border rounded"
           />
-          {errors.instructions && <p className="text-red-500 text-sm">{errors.instructions}</p>}
+          {errors.steps && <p className="text-red-500 text-sm">{errors.steps}</p>}
         </div>
 
         <button
